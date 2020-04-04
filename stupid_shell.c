@@ -18,11 +18,12 @@ int main(int ac, char **av)
 	int argcount = 1;
 	char *token;
 	int i;
+	extern char** environ;
 		/* shell prompt and argument acception*/
 		printf("ShiP$ ");
 		line_size = getline(&line_buf, &line_buf_size, stdin);
 		
-		line_buf[strlen(line_buf) - 1] = '\0';
+		line_buf[line_size - 1] = '\0';
 
 		/* malloc for the number of strings */
 		temp = strdup(line_buf);
@@ -30,7 +31,7 @@ int main(int ac, char **av)
 		while (token != NULL)
 		{
 			argcount++;
-			token = strtok(NULL, temp);
+			token = strtok(NULL, " ");
 		}
 
 		args = malloc(argcount * sizeof(char *));
@@ -41,9 +42,9 @@ int main(int ac, char **av)
 		while (token != NULL)
 		{
 			args[argcount] = token;
+			printf("%d : %s\n", argcount, token);
 			argcount++;
-			token = strtok(NULL, line_buf);
-			printf("%s==", token);
+			token = strtok(NULL, " ");
 		}
 		
 		/* not used in this example */
@@ -51,7 +52,6 @@ int main(int ac, char **av)
 
 		/* executes our command */
 		child_pid = fork();
-		main - child_of_main
 		if (child_pid == -1)
 		{
 			perror("Error:");
@@ -59,7 +59,7 @@ int main(int ac, char **av)
 		}
 		if (child_pid == 0)
 		{
-			if (execvp(args[0], args) == -1)
+			if (execve(args[0], args, environ) == -1)
 				perror("Error:");
 			return (0);
 		}
