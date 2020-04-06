@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 int _strlen(char *str);
+char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _atoi(char *s);
 int _strcmp(char *s1, char *s2);
