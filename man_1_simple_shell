@@ -1,0 +1,65 @@
+.TH SHELL 3 "5 April 2020" "1.0" "shell man page"
+.SH NAME
+ShiP$ - shellter_in_place
+
+
+.SH SYNOPSIS
+ShiP$ [options] [file]
+
+
+.SH DESCRIPTION
+
+.B ShiP$
+is a command language interpreter that executes commands read from the standard
+input or from a file.
+
+.B Overview
+
+shellter_in_place is a shell that reads input and generally executes commands.
+
+.B Lexical Structure
+
+shellter_in_place reads lines from a file and breaks it up
+into tokens at whitespace.
+
+.B Commands
+
+shellter_in_place interprets the tokens it reads according to a language, the
+specification of which is outside the scope of this man page. When a line
+is read and if the first token of the line (or after a control
+operator) is not a reserved word, then the shell has recognized a simple
+command.
+Otherwise, a complex command, options, or arguments may have been
+recognized.
+
+.B ./hsh
+This executable file runs shellter_in_place
+
+.SH BUILTINS
+
+.B exit
+The command to exit shellter_in_place
+
+.B env
+Prints out the environment variables
+
+
+.SH EXAMPLE
+
+$
+
+$ ls
+
+hsh main.c header.h
+
+$ exit
+
+$
+
+
+.SH BUGS
+No known bugs
+
+.SH AUTHOR
+Zac Woll (zachary.woll@holbertonschool.com) and Tabitha O'Melay
+(tabitha.omelay@holbertonschool.com)
