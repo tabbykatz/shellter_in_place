@@ -1,9 +1,4 @@
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "protos.h"
 
 int main(void)
 {
@@ -15,6 +10,7 @@ int main(void)
 	ssize_t getline_size;
 	char **argv;
 	size_t ac;
+	char *path_to_file;
 	int i;
 
 	printf("ShiP$ ");
@@ -22,39 +18,18 @@ int main(void)
 	line[getline_size - 1] = '\0';
 	printf("line_size: %zu\n", getline_size);
 
-	temp_line = strdup(line);
-	if (!temp_line)
+	argv = get_tokens(line, " ");
+
+	if (stat(argv[0]) == 0)
+		path_to_file = argv[0];
+	else
 	{
-		free(line);
-		/* exit */
+		path_to_file = strcat(whitcher(argv[0]), "/");
+		path_to_file = strcat(path_to_file, argv[0]);
 	}
 
-	temp_token = strtok(temp_line, " ");
-	ac = 0;
-	while (temp_token)
-	{
-		temp_token = strtok(NULL, " ");
-		ac++;
-	}
-	free(temp_line);
-
-	argv = malloc(sizeof(char *) * (ac + 1));
-	if (!argv)
-	{
-		free(line);
-	}
-
-	token = strtok(line, " ");
-	i = 0;
-	while (token)
-	{
-		printf("%d: %s, %zu bytes\n", i, token, strlen(token));
-		argv[i] = token;
-		i++;
-		token = strtok(NULL, " ");
-	}
-	argv[i] = NULL;
-
+	printf("path_to_file: %s\n", path_to_file);
+	
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -62,7 +37,7 @@ int main(void)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(path_to_file, argv, NULL) == -1)
 			perror("Error:");
 		return (0);
 	}
