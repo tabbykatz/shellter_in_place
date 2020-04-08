@@ -1,32 +1,54 @@
 #include "protos.h"
 
-int main(void)
+void _setenv(char *entry, char ***env)
 {
-	extern char **environ;
 	char **new_env;
-	char *new_entry = strdup("height=6ft");
+	int var_count = 0;
+
+	for (var_count = 0; *env[var_count]; var_count++)
+	{}
+
+	new_env = malloc(sizeof(char *) * (var_count + 2));
+	for (var_count = 0; *env[var_count]; var_count++)
+	{
+		new_env[var_count] = strdup(*env[var_count]);
+	}
+	new_env[var_count++] = entry;
+	new_env[var_count] = NULL;
+
+	*env = new_env;
+}
+
+/*
+char **_initenv()
+{
+	char **new_env;
+	extern char **environ;
 	int var_count = 0;
 
 	for (var_count = 0; environ[var_count]; var_count++)
 	{}
 
-	new_env = malloc(sizeof(char *) * (var_count + 2));
+	new_env = malloc(sizeof(char *) * var_count);
 	for (var_count = 0; environ[var_count]; var_count++)
 	{
-		new_env[var_count] = environ[var_count];
+		new_env[var_count] = strdup(environ[var_count]);
 	}
-	new_env[var_count++] = new_entry;
-	new_env[var_count] = NULL;
 
-	environ = new_env;
+	return new_env;
+}
+*/
+int main(void)
+{
+	extern char**environ;
+	char **env;
+	char *new_entry = strdup("ENVIRO=TOXIC");
+	int i;
+
+	env = environ;
+
+	_setenv(new_entry, &env);
 	
-	/*	
-	for (var_count = 0; temp[var_count]; var_count++)
-	{
-		free(temp[var_count]);
-	}
-	free(temp);
-	*/
 	char *argv[] = {"/usr/bin/env", NULL};
 	execve(argv[0], argv, environ);
 	

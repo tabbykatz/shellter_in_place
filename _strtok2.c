@@ -52,11 +52,11 @@ int main(void)
 	char *stringDup = strdup(string);
 	char *token = NULL;
 
-	token = _strtok(stringDup, " ");
+	token = _strtok(stringDup, ' ');
 	while (token)
 	{
 		printf("%s\n", token);
-		token = _strtok(NULL, " ");
+		token = _strtok(NULL, ' ');
 	}
 	return (0);
 }
