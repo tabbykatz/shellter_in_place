@@ -1,66 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-int is_del(char c, const char *del)
-{
-	while (*del && del)
-	{
-		if (c == *del)
-		{
-			return (1);
-		}
-		++del;
-	}
-	return (0);
-}
 /**
-*
-*
-*
-*
-*
-*/
-int _strlen(char *str)
-{
-	int i;
-
-	for (i = 0; str; i++)
-	{}
-	return (i);
-}
-/**
- * _strtok - creates tokens from a string
- * @input: input string from getline
- * @del: delimiter = " ";.
- *
- * Return: token from a string in an array.
+ * _strtok - tokenizes a string
+ * @input: the string to tokenize
+ * @delim: where to divide tokens (" ")
+ * Return: pointer to token
  */
-char *_strtok(char *input, const char *del)
+char *_strtok(char *input, char delim)
 {
-	static unsigned int ct;
-	static char *strtoke;
+	/* declarations */
+	static char *begin;
+	static char *prevNull;
 	char *token = NULL;
-	int chk_spc = 0;
 
+	/* assign begin, check input */
 	if (input)
-	{
-		strtoke = input;
-		for (ct = 0; strtoke[ct]; ct++)
-		{
-			if (is_del(strtoke[ct], del))
-				strtoke[ct] = '\0';
-		}
-	}
+		begin = input;
 
-	if (strtoke == NULL || *strtoke == '\0')
+	if (!begin)
 		return (NULL);
 
-	token = strtoke;
+	/* look to see where we are in the string, after first call */
+	if (*begin == '\0')
+	{
+		if (begin == prevNull)
+		{
+			begin = NULL;
+			return (NULL);
+		}
+		prevNull = begin;
+		return (begin);
+	}
 
-	ct = _strlen(strtoke);
+	/* point to the beginning, look for delim, change to '/0' */
+	token = begin;
+	while (*begin)
+	{
+		if (*begin == delim)
+		{
+			*begin = '\0';
+			prevNull = begin;
+			begin++;
+			return (token);
+		}
+		begin++;
+	}
+	prevNull = begin;
 
-	if (strtoke[ct] == '\0' && _strlen(strtoke) > 0)
-		chk_spc = 1;
-	strtoke = strtoke + _strlen(strtoke) + chk_spc;
 	return (token);
 }
