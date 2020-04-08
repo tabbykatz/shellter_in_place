@@ -1,3 +1,4 @@
+#include "protos.h"
 /**
  * _strtok - tokenizes a string
  * @input: the string to tokenize
