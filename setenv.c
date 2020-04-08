@@ -4,9 +4,13 @@ void _setenv(char *entry, char ***env)
 {
 	char **new_env;
 	int var_count = 0;
+	
+	printf("setenv\n\n");
 
 	for (var_count = 0; *env[var_count]; var_count++)
-	{}
+	{
+		printf("%d: %s\n", var_count, *env[var_count]);
+	}
 
 	new_env = malloc(sizeof(char *) * (var_count + 2));
 	for (var_count = 0; *env[var_count]; var_count++)
@@ -46,7 +50,7 @@ int main(void)
 	int i;
 
 	env = environ;
-
+	
 	_setenv(new_entry, &env);
 	
 	char *argv[] = {"/usr/bin/env", NULL};
