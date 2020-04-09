@@ -16,7 +16,7 @@ int main(void)
 	line[getline_size - 1] = '\0';
 	printf("line_size: %li\n", getline_size);
 
-	/* TODO: remove comments */
+	rem_comments(line);
 	argv = get_tokens(line, " ");
 
 	if (stat(argv[0], &st) == 0)

@@ -5,6 +5,7 @@
  * @delim: where to divide tokens (" ")
  * Return: pointer to token
  */
+
 char *_strtok(char *input, char *delim)
 {
 	/* declarations */
