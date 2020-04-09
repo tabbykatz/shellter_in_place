@@ -1,3 +1,4 @@
+#include "protos.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,27 +13,27 @@ char **get_tokens(char *tok_str, char *delim)
 	char *temp = NULL;
 	size_t count = 0;
 
-	temp = strdup(tok_str);
+	temp = _strdup(tok_str);
 	if (!temp)
 		return (NULL);
-	token = strtok(temp, delim);
+	token = _strtok(temp, delim);
 	while (token)
 	{
 		count++;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	free(temp);
 	tokens = malloc(sizeof(char *) * (count + 1));
 	if (!tokens)
 		return (NULL);
 
-	token = strtok(tok_str, delim);
+	token = _strtok(tok_str, delim);
 	printf("=get_tokens\n");
 	for (count = 0; token; count++)
 	{
-		printf("%zu: %s, %zu bytes\n", count, token, strlen(token));
+		printf("%zu: %s, %zu bytes\n", count, token, _strlen(token));
 		tokens[count] = token;
-		token = strtok(NULL, delim);
+		token = _strtok(NULL, delim);
 	}
 	tokens[count] = NULL;
 
