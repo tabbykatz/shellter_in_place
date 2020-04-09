@@ -1,0 +1,50 @@
+#include "protos.h"
+/**
+ * _strtok - tokenizes a string
+ * @input: the string to tokenize
+ * @delim: where to divide tokens (" ")
+ * Return: pointer to token
+ */
+char *_strtok(char *input, char delim)
+{
+	/* declarations */
+	static char *begin;
+	static char *prevNull;
+	char *token = NULL;
+
+	/* assign begin, check input */
+	if (input)
+		begin = input;
+
+	if (!begin)
+		return (NULL);
+
+	/* look to see where we are in the string, after first call */
+	if (*begin == '\0')
+	{
+		if (begin == prevNull)
+		{
+			begin = NULL;
+			return (NULL);
+		}
+		prevNull = begin;
+		return (begin);
+	}
+
+	/* point to the beginning, look for delim, change to '/0' */
+	token = begin;
+	while (*begin)
+	{
+		if (*begin == delim)
+		{
+			*begin = '\0';
+			prevNull = begin;
+			begin++;
+			return (token);
+		}
+		begin++;
+	}
+	prevNull = begin;
+
+	return (token);
+}
