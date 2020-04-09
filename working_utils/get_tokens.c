@@ -21,13 +21,13 @@ char **get_tokens(char *tok_str, char *delim)
 	if (!tokens)
 		return (NULL);
 
-	token = _strtok(tok_str, delim);
+	token = strtok(tok_str, delim);
 	printf("=get_tokens\n");
 	for (count = 0; token; count++)
 	{
 		printf("%lu: %s, %d bytes\n", count, token, _strlen(token));
 		tokens[count] = token;
-		token = _strtok(NULL, delim);
+		token = strtok(NULL, delim);
 	}
 	tokens[count] = NULL;
 

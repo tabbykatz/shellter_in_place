@@ -71,6 +71,35 @@ void _unsetenv(char *entry, char ***env)
 	
 	*env = new_env;
 }
+
+char *_getenv(char *entry, char ***env)
+{
+	int var_count;
+	char *val;
+	char *env_var = strdup(entry);
+
+	printf("=getenv\n");
+	for (var_count = 0; (*env)[var_count]; var_count++)
+	{
+		printf("%d: %s\n", var_count, (*env)[var_count]);
+		if (!strncmp(env_var, (*env)[var_count], strlen(env_var)))
+		{
+			env_var = strchr((*env)[var_count], '=') + 1;
+			return env_var;
+		}
+	}
+	free(env_var);
+	return NULL;
+}
+/* test of _getenv
+int main(void)
+{
+	char **env = _initenv();
+
+	printf("%s\n", _getenv("PATH", &env));
+	return (0);
+}
+*/
 /*
 int main(void)
 {
