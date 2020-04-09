@@ -6,6 +6,7 @@ char **_initenv(void)
 	extern char **environ;
 	int var_count = 0;
 
+	printf("=initenv\n");
 	for (var_count = 0; environ[var_count]; var_count++)
 	{}
 
@@ -25,7 +26,7 @@ void _setenv(char *entry, char ***env)
 	char **new_env;
 	int var_count = 0;
 	
-	printf("setenv\n\n");
+	printf("=setenv\n\n");
 
 	for (var_count = 0; (*env)[var_count]; var_count++)
 	{
@@ -49,7 +50,7 @@ void _unsetenv(char *entry, char ***env)
 	int var_count;
 	int i;
 
-	printf("unsetenv\n\n");
+	printf("=unsetenv\n\n");
 
 	for (var_count = 0; (*env)[var_count]; var_count++)
 	{
