@@ -30,6 +30,7 @@ char **get_tokens(char *tok_str, char *delim)
 		token = _strtok(NULL, delim);
 	}
 	tokens[count] = NULL;
+	free(token);
 
 	return tokens;
 }

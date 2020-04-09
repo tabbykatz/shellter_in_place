@@ -43,7 +43,8 @@ char *_strtok(char *input, char *delim)
 			{
 				*begin = '\0';
 				prevNull = begin;
-				begin++;
+				if (*(begin + 1) != '\0')
+					begin++;
 				return (token);
 			}
 		}
