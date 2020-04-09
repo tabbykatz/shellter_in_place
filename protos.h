@@ -31,7 +31,7 @@ int isin_dir(char *term, char *dir);
 char *whitcher(char *cmd);
 
 char **_initenv(void);
-void setenv(char *entry, char ***env);
-void unsetenv(char *entry, char ***env);
+void _setenv(char *entry, char ***env);
+void _unsetenv(char *entry, char ***env);
 
 #endif /* PROTOS */
