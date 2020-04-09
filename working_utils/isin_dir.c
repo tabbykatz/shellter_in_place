@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <dirent.h>
+#include "protos.h"
 
 int isin_dir(char *term, char *dir)
 {
