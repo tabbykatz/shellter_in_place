@@ -71,7 +71,7 @@ void _unsetenv(char *entry, char ***env)
 	
 	*env = new_env;
 }
-
+/*
 int main(void)
 {
 	char **env;
@@ -105,3 +105,4 @@ int main(void)
 	wait(&status);
 	return (0);
 }
+*/

@@ -4,16 +4,13 @@ int main(void)
 {
 	int status;
 	pid_t child_pid;
-	char *line = NULL, *temp_line;
-	char *token, *temp_token;
-	size_t line_size = 0;
+	char *line = NULL;
+	size_t line_size = 0, ac;
 	ssize_t getline_size;
-	char **argv;
+	char **argv, **env, *path_to_file, *temp_line, *token, *temp_token;
 	struct stat st;
-	size_t ac;
-	char *path_to_file;
-	int i;
-	extern char** environ;
+
+	env = _initenv();
 
 	printf("ShiP$ ");
 	getline_size = getline(&line, &line_size, stdin);
@@ -32,6 +29,7 @@ int main(void)
 
 	printf("path_to_file: %s\n", path_to_file);
 	
+	/* TODO: handle execve in a fnc */
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -39,12 +37,13 @@ int main(void)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(path_to_file, argv, environ) == -1)
+		if (execve(path_to_file, argv, env) == -1)
 			perror("Error:");
 		return (0);
 	}
 
 	wait(&status);
+
 	free(line);
 	free(argv);
 

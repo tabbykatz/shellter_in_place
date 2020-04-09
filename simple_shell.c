@@ -9,8 +9,11 @@ int main(void)
 	size_t line_size = 0;
 	ssize_t getline_size;
 	char **argv;
+	struct stat st;
 	size_t ac;
+	char *path_to_file;
 	int i;
+	extern char** environ;
 
 	printf("ShiP$ ");
 	getline_size = getline(&line, &line_size, stdin);
@@ -19,6 +22,16 @@ int main(void)
 
 	argv = get_tokens(line, " ");
 
+	if (stat(argv[0], &st) == 0)
+		path_to_file = argv[0];
+	else
+	{
+		path_to_file = strcat(whitcher(argv[0]), "/");
+		path_to_file = strcat(path_to_file, argv[0]);
+	}
+
+	printf("path_to_file: %s\n", path_to_file);
+	
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -26,7 +39,7 @@ int main(void)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		if (execve(path_to_file, argv, environ) == -1)
 			perror("Error:");
 		return (0);
 	}
