@@ -4,10 +4,9 @@ int main(void)
 {
 	int status;
 	pid_t child_pid;
-	char *line = NULL;
-	size_t line_size = 0, ac;
+	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, **env, *path_to_file, *temp_line, *token, *temp_token;
+	char **argv, **env, *path_to_file, *line = NULL;
 	struct stat st;
 
 	env = _initenv();
@@ -15,8 +14,9 @@ int main(void)
 	printf("ShiP$ ");
 	getline_size = getline(&line, &line_size, stdin);
 	line[getline_size - 1] = '\0';
-	printf("line_size: %zu\n", getline_size);
+	printf("line_size: %li\n", getline_size);
 
+	/* TODO: remove comments */
 	argv = get_tokens(line, " ");
 
 	if (stat(argv[0], &st) == 0)

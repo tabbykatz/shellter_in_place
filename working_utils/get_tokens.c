@@ -25,7 +25,7 @@ char **get_tokens(char *tok_str, char *delim)
 	printf("=get_tokens\n");
 	for (count = 0; token; count++)
 	{
-		printf("%zu: %s, %d bytes\n", count, token, _strlen(token));
+		printf("%lu: %s, %d bytes\n", count, token, _strlen(token));
 		tokens[count] = token;
 		token = _strtok(NULL, delim);
 	}
