@@ -5,12 +5,13 @@
  * @delim: where to divide tokens (" ")
  * Return: pointer to token
  */
-char *_strtok(char *input, char delim)
+char *_strtok(char *input, char *delim)
 {
 	/* declarations */
 	static char *begin;
 	static char *prevNull;
 	char *token = NULL;
+	int i;
 
 	/* assign begin, check input */
 	if (input)
@@ -31,16 +32,19 @@ char *_strtok(char *input, char delim)
 		return (begin);
 	}
 
-	/* point to the beginning, look for delim, change to '/0' */
+	/* point to the beginning, look for delim, change to '\0' */
 	token = begin;
 	while (*begin)
 	{
-		if (*begin == delim)
+		for (i = 0; delim[i]; i++)
 		{
-			*begin = '\0';
-			prevNull = begin;
-			begin++;
-			return (token);
+			if (*begin == delim[i])
+			{
+				*begin = '\0';
+				prevNull = begin;
+				begin++;
+				return (token);
+			}
 		}
 		begin++;
 	}
