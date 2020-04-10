@@ -26,12 +26,15 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
 
+void cmd_handler(char **argv, char ***env);
+
 char **get_tokens(char *str_tok, char *delim);
 int isin_dir(char *term, char *dir);
-char *whitcher(char *cmd);
+char *whitcher(char *cmd, char ***env);
+void rem_comments(char *str);
 
 char **_initenv(void);
 void _setenv(char *entry, char ***env);
 void _unsetenv(char *entry, char ***env);
-
+char *_getenv(char *entry, char ***env);
 #endif /* PROTOS */

@@ -2,7 +2,7 @@
 
 int main(void)
 {
-	int status;
+	int status, exit_status = 0;
 	pid_t child_pid;
 	size_t line_size = 0;
 	ssize_t getline_size;
@@ -10,42 +10,35 @@ int main(void)
 	struct stat st;
 
 	env = _initenv();
-
-	printf("ShiP$ ");
-	getline_size = getline(&line, &line_size, stdin);
-	line[getline_size - 1] = '\0';
-	printf("line_size: %li\n", getline_size);
-
-	rem_comments(line);
-	argv = get_tokens(line, " ");
-
-	if (stat(argv[0], &st) == 0)
-		path_to_file = argv[0];
-	else
+	while (1)
 	{
-		path_to_file = strcat(whitcher(argv[0]), "/");
-		path_to_file = strcat(path_to_file, argv[0]);
-	}
+		printf("ShiP$ ");
+		getline_size = getline(&line, &line_size, stdin);
+		line[getline_size - 1] = '\0';
+		printf("line_size: %li\n", getline_size);
 
-	printf("path_to_file: %s\n", path_to_file);
-	
-	/* TODO: handle execve in a fnc */
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("Error:");
-	}
-	if (child_pid == 0)
-	{
-		if (execve(path_to_file, argv, env) == -1)
+		rem_comments(line);
+		argv = get_tokens(line, " ");
+
+		if (!strcmp(argv[0], "exit") || getline_size == -1)
+		{
+			if (argv[1])
+				exit_status = atoi(argv[1]);
+			free(line);
+			free(env);
+			return (exit_status);
+		}
+
+		child_pid = fork();
+		if (child_pid == -1)
+		{
 			perror("Error:");
-		return (0);
+		}
+		if (child_pid == 0)
+		{
+			cmd_handler(argv, &env);
+		}
+		wait(&status);
 	}
-
-	wait(&status);
-
-	free(line);
-	free(argv);
-
 	return (0);
 }

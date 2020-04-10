@@ -81,7 +81,6 @@ char *_getenv(char *entry, char ***env)
 	printf("=getenv\n");
 	for (var_count = 0; (*env)[var_count]; var_count++)
 	{
-		printf("%d: %s\n", var_count, (*env)[var_count]);
 		if (!strncmp(env_var, (*env)[var_count], strlen(env_var)))
 		{
 			env_var = strchr((*env)[var_count], '=') + 1;

@@ -42,26 +42,3 @@ char *_strcat(char *dest, char *src)
 	*dest = '\0';
 return (begin);
 }
-/**
- * _strncmp - compare two strings by int n
- * @s: one string
- * @t: the other
- * @n: how many chars compared
- * Return: 0, 1, or diff
- */
-int _strncmp(char *s, char *t, int n)
-{
-
-	if (_strlen(s) == _strlen(t))
-	{
-		while (*s == *t && *s && n)
-		n--, s++, t++;
-
-		if (!n)
-			return (0);
-		else
-			return (1);
-	}
-	else
-		return (_strlen(s) - _strlen(t));
-}

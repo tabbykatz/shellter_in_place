@@ -1,8 +1,8 @@
 #include "protos.h"
 
-char *whitcher(char *cmd)
+char *whitcher(char *cmd, char ***env)
 {
-	char *PATH = getenv("PATH");
+	char *PATH = _getenv("PATH", env);
 	char **tokens;
 	int i;
 
@@ -20,7 +20,5 @@ char *whitcher(char *cmd)
 			return (tokens[i]);
 		}
 	}
-
-	printf("FULL PATH: %s\n", PATH);
-	return ("ERROR 404: FILE NOT FOUND");
+	return (PATH);
 }
