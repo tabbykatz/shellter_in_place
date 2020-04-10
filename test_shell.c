@@ -20,10 +20,10 @@ int main(void)
 		rem_comments(line);
 		argv = get_tokens(line, " ");
 
-		if (!strcmp(argv[0], "exit") || getline_size == -1)
+		if (!_strcmp(argv[0], "exit") || getline_size == -1)
 		{
 			if (argv[1])
-				exit_status = atoi(argv[1]);
+				exit_status = _atoi(argv[1]);
 			free(line);
 			free(env);
 			return (exit_status);
