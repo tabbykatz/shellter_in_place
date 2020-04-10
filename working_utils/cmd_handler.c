@@ -53,8 +53,6 @@ void cmd_handler(char **argv, char ***env)
 	}
 	wait(&status);
 
-	/*
 	free(path_to_file);
-	*/
 	return;
 }
