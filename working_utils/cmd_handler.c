@@ -3,9 +3,10 @@
 void cmd_handler(char **argv, char ***env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
-	int i;
+	int i, status;
 	struct stat st;
 	char *path_to_file;
+	pid_t child_pid;
 
 	/* if it's a buitin */
 	for (i = 0; built_ins[i]; i++)
@@ -35,7 +36,25 @@ void cmd_handler(char **argv, char ***env)
 		printf("Sorry, that's not a thing\n");
 		return;
 	}
-
+	
 	if (execve(path_to_file, argv, *env) == -1)
 		perror("Error:");
+
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Error:");
+		return;
+	}
+	if (child_pid == 0)
+	{
+		if (execve(path_to_file, argv, *env) == -1)
+			perror("Error:");
+	}
+	wait(&status);
+
+	/*
+	free(path_to_file);
+	*/
+	return;
 }
