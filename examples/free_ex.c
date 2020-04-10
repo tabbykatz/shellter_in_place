@@ -15,11 +15,11 @@ void double_free(char **argv)
 
 int main(void)
 {
-	char *fruit[] = {"apples", "bananas", "oranges"};
+	char *fruit[] = {"apples", "bananas", "oranges", NULL};
 	int i;
 	char **fruit_copy;
 
-	fruit_copy = malloc(sizeof(char *) * 3);
+	fruit_copy = malloc(sizeof(char *) * 4);
 	for (i = 0; fruit[i]; i++)
 	{
 		fruit_copy[i] = strdup(fruit[i]);

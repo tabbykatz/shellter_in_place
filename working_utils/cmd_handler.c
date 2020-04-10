@@ -37,9 +37,6 @@ void cmd_handler(char **argv, char ***env)
 		return;
 	}
 	
-	if (execve(path_to_file, argv, *env) == -1)
-		perror("Error:");
-
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -50,9 +47,11 @@ void cmd_handler(char **argv, char ***env)
 	{
 		if (execve(path_to_file, argv, *env) == -1)
 			perror("Error:");
+		exit(0);
 	}
 	wait(&status);
-
+/*
 	free(path_to_file);
+*/
 	return;
 }
