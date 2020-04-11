@@ -1,5 +1,34 @@
 #include "protos.h"
 
+void built_in_handler(char **argv, char ***env, int i)
+{
+	/*
+	char *env_entry = strdup(argv[1]);
+	printf("foo %s\n", env_entry);
+	*/
+	switch (i)
+	{
+		case 0:
+			printf("cd\n");
+			break;
+		case 1:
+			/*
+			env_entry = strcat(env_entry, "=");
+			printf("foo2 %s\n", env_entry);
+			env_entry = strcat(env_entry, argv[2]);
+			printf("foo3 %s\n", env_entry);
+			*/
+			_setenv(argv[1], env);
+			break;
+		case 2:
+			_unsetenv(argv[1], env);
+			break;
+		case 3:
+			_printenv(env);
+			break;
+	}
+}
+
 void cmd_handler(char **argv, char ***env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
@@ -13,10 +42,9 @@ void cmd_handler(char **argv, char ***env)
 	{
 		if (!strcmp(built_ins[i], argv[0]))
 		{
-			printf("it's a built-in!");
+			built_in_handler(argv, env, i);
 			return;
 		}
-		/* fire built_in fnc */
 	}
 
 	path_to_file = whitcher(argv[0], env);

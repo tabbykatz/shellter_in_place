@@ -26,15 +26,28 @@ char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
 
+/* cmd_handler */
 void cmd_handler(char **argv, char ***env);
+void built_in_handler(char **argv, char ***env, int i);
 
+/* cmd assembly */
 char **get_tokens(char *str_tok, char *delim);
 int isin_dir(char *term, char *dir);
 char *whitcher(char *cmd, char ***env);
 void rem_comments(char *str);
 
+/* env variable */
 char **_initenv(void);
 void _setenv(char *entry, char ***env);
 void _unsetenv(char *entry, char ***env);
 char *_getenv(char *entry, char ***env);
+void _printenv(char ***env);
+
+/* order of operation */
+typedef struct operation
+{
+	unsigned int n;
+	struct operation *next;
+} operation_t;
+
 #endif /* PROTOS */

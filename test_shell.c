@@ -25,7 +25,7 @@ int main(void)
 			if (argv[1])
 				exit_status = _atoi(argv[1]);
 			free(line);
-			free(env);
+			double_free(env);
 			return (exit_status);
 		}
 
