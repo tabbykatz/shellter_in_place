@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 char **get_tokens(char *tok_str, char *delim)
 {

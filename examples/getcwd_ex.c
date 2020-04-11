@@ -1,14 +1,13 @@
 #include <stdio.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <string.h>
 
 int main(void)
 {
 	char buf[BUFSIZ];
 	char *cp;
 
+	printf("BUFSIZ = %d\n", BUFSIZ);
 	cp = getcwd(buf, sizeof(buf));
 	printf("Current dir: %s\n", buf);
 
@@ -16,7 +15,6 @@ int main(void)
 	chdir("..");			/* `cd ..' */
 
 	cp = getcwd(buf, sizeof(buf));
-	printf("Current dir is now: %s\n", buf);
-
+	printf("Current dir is now: %s, %zu bytes\n", buf, strlen(buf));
 	return 0;
 }

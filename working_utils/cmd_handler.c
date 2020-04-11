@@ -1,24 +1,14 @@
-#include "protos.h"
+#include "shell.h"
 
 void built_in_handler(char **argv, char ***env, int i)
 {
-	/*
-	char *env_entry = strdup(argv[1]);
-	printf("foo %s\n", env_entry);
-	*/
 	switch (i)
 	{
 		case 0:
 			printf("cd\n");
 			break;
 		case 1:
-			/*
-			env_entry = strcat(env_entry, "=");
-			printf("foo2 %s\n", env_entry);
-			env_entry = strcat(env_entry, argv[2]);
-			printf("foo3 %s\n", env_entry);
-			*/
-			_setenv(argv[1], env);
+			_setenv(argv, env);
 			break;
 		case 2:
 			_unsetenv(argv[1], env);

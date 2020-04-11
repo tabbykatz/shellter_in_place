@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 void rem_comments(char *str)
 {

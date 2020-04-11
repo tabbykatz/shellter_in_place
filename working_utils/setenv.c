@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 char **_initenv(void)
 {
@@ -21,24 +21,28 @@ char **_initenv(void)
 	return new_env;
 }
 
-void _setenv(char *entry, char ***env)
+void _setenv(char **argv, char ***env)
 {
 	char **new_env;
 	int var_count = 0;
-	
+	size_t entry_size = _strlen(argv[1]) + _strlen(argv[2]) + 2;
+	char *new_entry = malloc(sizeof(char) * entry_size);
+
 	printf("=setenv\n\n");
 
+	new_entry = _strcpy(new_entry, argv[1]);
+	new_entry = _strcat(new_entry, "=");
+	new_entry = _strcat(new_entry, argv[2]);
+
 	for (var_count = 0; (*env)[var_count]; var_count++)
-	{
-		printf("%d: %s\n", var_count, (*env)[var_count]);
-	}
+	{}
 
 	new_env = malloc(sizeof(char *) * (var_count + 2));
 	for (var_count = 0; (*env)[var_count]; var_count++)
 	{
 		new_env[var_count] = (*env)[var_count];
 	}
-	new_env[var_count++] = entry;
+	new_env[var_count++] = new_entry;
 	new_env[var_count] = NULL;
 
 	*env = new_env;
@@ -49,6 +53,7 @@ void _unsetenv(char *entry, char ***env)
 	char **new_env;
 	int var_count;
 	int i;
+	int success = 0;
 
 	printf("=unsetenv\n\n");
 
@@ -61,13 +66,16 @@ void _unsetenv(char *entry, char ***env)
 
 	for (var_count = 0, i = 0; (*env)[var_count]; var_count++)
 	{
-		if (strcmp(entry, (*env)[var_count]))
+		if (strncmp(entry, (*env)[var_count], _strlen(entry)))
 		{
 			new_env[i] = (*env)[var_count];
 			i++;
 		}
+		else
+			success = 1;
 	}
-	new_env[var_count - 1] = NULL;
+	if (success)
+		new_env[var_count - 1] = NULL;
 	
 	*env = new_env;
 }

@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 void double_free(char **argv)
 {

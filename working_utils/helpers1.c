@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 /**
  * _realloc - realloc old ptr to new
  * @ptr: old one

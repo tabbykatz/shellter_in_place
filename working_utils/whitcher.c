@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 char *whitcher(char *cmd, char ***env)
 {

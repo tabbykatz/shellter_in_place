@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 /**
   * *_strcpy - copies the string pointed
   *to by src, including the terminating null byte

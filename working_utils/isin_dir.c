@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 int isin_dir(char *term, char *dir)
 {
