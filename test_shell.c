@@ -6,10 +6,11 @@ int main(void)
 	pid_t child_pid;
 	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, **env, *path_to_file, *line = NULL;
+	char **argv, *path_to_file, *line = NULL;
 	struct stat st;
+	env_list_t **env;
 
-	env = _initenv();
+	env = _initenv_list();
 	while (1)
 	{
 		printf("ShiP$ ");
@@ -25,11 +26,10 @@ int main(void)
 			if (argv[1])
 				exit_status = _atoi(argv[1]);
 			free(line);
-			double_free(env);
 			return (exit_status);
 		}
 
-		cmd_handler(argv, &env);
+		cmd_handler(argv, env);
 	}
 	return (0);
 }

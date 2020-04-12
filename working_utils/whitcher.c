@@ -1,8 +1,8 @@
 #include "shell.h"
 
-char *whitcher(char *cmd, char ***env)
+char *whitcher(char *cmd, env_list_t **env)
 {
-	char *PATH = _getenv("PATH", env);
+	char *PATH = _getenv_list_value("PATH", env);
 	char **tokens;
 	int i;
 

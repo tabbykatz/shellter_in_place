@@ -1,31 +1,32 @@
 #include "shell.h"
 
-void built_in_handler(char **argv, char ***env, int i)
+void built_in_handler(char **argv, env_list_t **env, int i)
 {
 	switch (i)
 	{
 		case 0:
-			printf("cd\n");
+			_cd(argv, env);
 			break;
 		case 1:
-			_setenv(argv, env);
+			_setenv_list(argv, env);
 			break;
 		case 2:
-			_unsetenv(argv[1], env);
+			_unsetenv_list(argv, env);
 			break;
 		case 3:
-			_printenv(env);
+			printenv_list(env);
 			break;
 	}
 }
 
-void cmd_handler(char **argv, char ***env)
+void cmd_handler(char **argv, env_list_t **env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
 	int i, status;
 	struct stat st;
 	char *path_to_file;
 	pid_t child_pid;
+	char **str_env = _get_str_env(env);
 
 	/* if it's a buitin */
 	for (i = 0; built_ins[i]; i++)
@@ -44,7 +45,7 @@ void cmd_handler(char **argv, char ***env)
 	/* Else it must not be a cmd */
 	if (stat(argv[0], &st) == 0)
 		path_to_file = argv[0];
-	else if (strcmp(path_to_file, _getenv("PATH", env)))
+	else if (strcmp(path_to_file, _getenv_list_value("PATH", env)))
 	{
 		path_to_file = strcat(whitcher(argv[0], env), "/");
 		path_to_file = strcat(path_to_file, argv[0]);
@@ -63,7 +64,7 @@ void cmd_handler(char **argv, char ***env)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(path_to_file, argv, *env) == -1)
+		if (execve(path_to_file, argv, str_env) == -1)
 			perror("Error:");
 		exit(0);
 	}

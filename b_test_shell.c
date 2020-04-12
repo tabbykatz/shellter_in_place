@@ -1,4 +1,4 @@
-#include "protos.h"
+#include "shell.h"
 
 int main(void)
 {
@@ -6,10 +6,11 @@ int main(void)
 	pid_t child_pid;
 	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, **env, *path_to_file, *line = NULL;
+	char **argv, *path_to_file, *line = NULL;
 	struct stat st;
+	env_list_t **env;
 
-	env = _initenv();
+	env = _initenv_list();
 	while (1)
 	{
 		printf("ShiP$ ");
@@ -20,25 +21,15 @@ int main(void)
 		rem_comments(line);
 		argv = get_tokens(line, " ");
 
-		if (!strcmp(argv[0], "exit") || getline_size == -1)
+		if (!_strcmp(argv[0], "exit") || getline_size == -1)
 		{
 			if (argv[1])
-				exit_status = atoi(argv[1]);
+				exit_status = _atoi(argv[1]);
 			free(line);
-			free(env);
 			return (exit_status);
 		}
 
-		child_pid = fork();
-		if (child_pid == -1)
-		{
-			perror("Error:");
-		}
-		if (child_pid == 0)
-		{
-			cmd_handler(argv, &env);
-		}
-		wait(&status);
+		cmd_handler(argv, env);
 	}
 	return (0);
 }

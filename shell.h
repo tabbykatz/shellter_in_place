@@ -11,6 +11,20 @@
 #include <errno.h>
 #include <sys/wait.h>
 
+/* structs */
+typedef struct operation
+{
+	unsigned int n;
+	struct operation *next;
+} operation_t;
+
+typedef struct env_list
+{
+	char *name;
+	char *value;
+	struct env_list *next;
+} env_list_t;
+
 /* getline */
 int _getline(char **lineptr, size_t *n, FILE *stream);
 
@@ -27,13 +41,13 @@ char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
 
 /* cmd_handler */
-void cmd_handler(char **argv, char ***env);
-void built_in_handler(char **argv, char ***env, int i);
+void cmd_handler(char **argv, env_list_t **env);
+void built_in_handler(char **argv, env_list_t **env, int i);
 
 /* cmd assembly */
 char **get_tokens(char *str_tok, char *delim);
 int isin_dir(char *term, char *dir);
-char *whitcher(char *cmd, char ***env);
+char *whitcher(char *cmd, env_list_t **env);
 void rem_comments(char *str);
 
 /* env variable */
@@ -43,11 +57,15 @@ void _unsetenv(char *entry, char ***env);
 char *_getenv(char *entry, char ***env);
 void _printenv(char ***env);
 
-/* order of operation */
-typedef struct operation
-{
-	unsigned int n;
-	struct operation *next;
-} operation_t;
+/* env_list */
+env_list_t **_initenv_list(void);
+void printenv_list(env_list_t **env);
+char *_getenv_list_value(char *name, env_list_t **env);
+env_list_t *_getenv_list_node(char *name, env_list_t **env);
+void _setenv_list(char **argv, env_list_t **env);
+void free_env_list_node(env_list_t *node);
+void _unsetenv_list(char **argv, env_list_t **env);
+void free_env_list(env_list_t **env);
+char **_get_str_env(env_list_t **env);
 
 #endif /* PROTOS */
