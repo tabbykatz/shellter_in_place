@@ -9,7 +9,7 @@ typedef struct env_list
 
 env_list_t **_initenv_list(void)
 {
-	env_list_t **env;
+	env_list_t **env = malloc(sizeof(env_list_t *));
 	env_list_t *head = NULL;
 	env_list_t *new_env = NULL;
 	extern char **environ;
@@ -49,6 +49,8 @@ void printenv_list(env_list_t **env)
 		i = i->next;
 	}
 }
+
+
 
 int main(void)
 {
