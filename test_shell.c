@@ -19,6 +19,9 @@ int main(void)
 		printf("line_size: %li\n", getline_size);
 
 		rem_comments(line);
+
+
+		
 		argv = get_tokens(line, " ");
 
 		if (!_strcmp(argv[0], "exit") || getline_size == -1)

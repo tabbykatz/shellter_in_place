@@ -1,10 +1,5 @@
 #include "shell.h"
 
-void _cd(char **argv, env_list_t **env)
-{
-	
-}
-
 int main(void)
 {
 	char buf[BUFSIZ]; // BUFSIZ is ~8k
