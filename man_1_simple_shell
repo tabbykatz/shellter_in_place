@@ -26,28 +26,36 @@ into tokens at whitespace.
 This executable file runs shellter_in_place
 
 .SH USAGE
-In addition to searching the path, the following features are supported:
-   exit - Exit shell with a specified exit status
-   env - Print a list of the environment variables
-   setenv - Set a new environment variable
-   unsetenv - Unset an environment variable
-   cd - Change directories
-   Ctrl-D - End of file: exit shell
-   Ctrl-C - Does NOT exit shell
-   ; - Command separator for command chaining
-   # - Comment indicator
-
+	In addition to searching the path, the following features are supported:
+.br
+	exit - Exit shell with a specified exit status
+.br   
+	env - Print a list of the environment variables
+.br	
+	setenv - Set a new environment variable
+.br	
+	unsetenv - Unset an environment variable
+.br
+	cd - Change directories
+.br
+	Ctrl-D - End of file: exit shell
+.br	
+	; - Command separator
+.br
+	# - Comment indicator
+.br
 .SH BUILTINS
-.B exit
-The command to exit shellter_in_place
-.B cd
-The command to change the directory
-.B env
-Prints out the environment variables
-.B setenv
-Initialize a new environment variable, or modify an existing one
-.B unsetenv
-Remove an environment variable
+.br
+	exit - to exit shellter_in_place
+.br
+	cd - to change the directory
+.br
+	env - prints out the environment variables
+.br
+	setenv - initialize a new environment variable, or modify an existing one
+.br
+	unsetenv - remove an environment variable
+.br
 
 
 .SH EXAMPLE
