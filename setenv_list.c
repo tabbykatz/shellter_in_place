@@ -10,7 +10,6 @@ char *_getenv_list_value(char *name, env_list_t **env)
 {
 	env_list_t *i = *env;
 
-	printf("=_getenv_list\n");
 	while (i)
 	{
 		if (!strcmp(name, i->name))
@@ -32,7 +31,6 @@ env_list_t *_getenv_list_node(char *name, env_list_t **env)
 {
 	env_list_t *i = *env;
 
-	printf("=_getenv_list\n");
 	while (i)
 	{
 		if (!strcmp(name, i->name))
