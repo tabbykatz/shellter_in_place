@@ -22,37 +22,49 @@ shellter_in_place is a shell that reads input and generally executes commands.
 shellter_in_place reads lines from a file and breaks it up
 into tokens at whitespace.
 
-.B Commands
-
-shellter_in_place interprets the tokens it reads according to a language, the
-specification of which is outside the scope of this man page. When a line
-is read and if the first token of the line (or after a control
-operator) is not a reserved word, then the shell has recognized a simple
-command.
-Otherwise, a complex command, options, or arguments may have been
-recognized.
-
 .B ./hsh
 This executable file runs shellter_in_place
 
+.SH USAGE
+	In addition to searching the path, the following features are supported:
+.br
+	exit - Exit shell with a specified exit status
+.br
+	env - Print a list of the environment variables
+.br
+	setenv - Set a new environment variable
+.br
+	unsetenv - Unset an environment variable
+.br
+	cd - Change directories
+.br
+	Ctrl-D - End of file: exit shell
+.br
+	; - Command separator
+.br
+	# - Comment indicator
+.br
 .SH BUILTINS
-
-.B exit
-The command to exit shellter_in_place
-
-.B env
-Prints out the environment variables
+.br
+	exit - to exit shellter_in_place
+.br
+	cd - to change the directory
+.br
+	env - prints out the environment variables
+.br
+	setenv - initialize a new environment variable, or modify an existing one
+.br
+	unsetenv - remove an environment variable
+.br
 
 
 .SH EXAMPLE
 
-$
-
-$ ls
+Ship$ ls -a
 
 hsh main.c header.h
 
-$ exit
+Ship$ exit
 
 $
 
