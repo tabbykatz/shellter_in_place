@@ -1,5 +1,9 @@
 #include "shell.h"
 
+/**
+  * main - entry point
+  * Return: 0
+  */
 int main(void)
 {
 	int status, exit_status = 0, last_return = 1, i;
@@ -20,7 +24,6 @@ int main(void)
 		printf("ShiP$ ");
 		getline_size = getline(&line, &line_size, stdin);
 		line[getline_size - 1] = '\0';
-		printf("line_size: %li\n", getline_size);
 
 		if (getline_size == -1)
 		{
