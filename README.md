@@ -1,4 +1,4 @@
-![Ship$](blob/master/shellimg.jpeg)
+![Ship$](/shellimg.jpeg)
 i
 # 0x15. C - Simple Shell <br />
 
