@@ -29,17 +29,17 @@ This executable file runs shellter_in_place
 	In addition to searching the path, the following features are supported:
 .br
 	exit - Exit shell with a specified exit status
-.br   
+.br
 	env - Print a list of the environment variables
-.br	
+.br
 	setenv - Set a new environment variable
-.br	
+.br
 	unsetenv - Unset an environment variable
 .br
 	cd - Change directories
 .br
 	Ctrl-D - End of file: exit shell
-.br	
+.br
 	; - Command separator
 .br
 	# - Comment indicator
