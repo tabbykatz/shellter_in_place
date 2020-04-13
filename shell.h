@@ -12,11 +12,11 @@
 #include <sys/wait.h>
 
 /* structs */
-typedef struct operation
+typedef struct order
 {
 	unsigned int n;
-	struct operation *next;
-} operation_t;
+	struct order *next;
+} order_t;
 
 typedef struct env_list
 {
@@ -41,7 +41,7 @@ char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
 
 /* cmd_handler */
-void cmd_handler(char **argv, env_list_t **env);
+int cmd_handler(char **argv, env_list_t **env);
 void built_in_handler(char **argv, env_list_t **env, int i);
 
 /* cmd assembly */
@@ -49,6 +49,7 @@ char **get_tokens(char *str_tok, char *delim);
 int isin_dir(char *term, char *dir);
 char *whitcher(char *cmd, env_list_t **env);
 void rem_comments(char *str);
+
 
 /* env variable */
 char **_initenv(void);
@@ -67,5 +68,10 @@ void free_env_list_node(env_list_t *node);
 void _unsetenv_list(char **argv, env_list_t **env);
 void free_env_list(env_list_t **env);
 char **_get_str_env(env_list_t **env);
+
+/* ops */
+void *op_push_end(order_t **ops, int n);
+char **_get_cmds(char *line, order_t **ops);
+void free_ops(order_t **ops);
 
 #endif /* PROTOS */

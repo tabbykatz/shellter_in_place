@@ -19,7 +19,7 @@ void built_in_handler(char **argv, env_list_t **env, int i)
 	}
 }
 
-void cmd_handler(char **argv, env_list_t **env)
+int cmd_handler(char **argv, env_list_t **env)
 {
 	char *built_ins[] = {"cd", "setenv", "unsetenv", "env", NULL};
 	int i, status;
@@ -34,7 +34,7 @@ void cmd_handler(char **argv, env_list_t **env)
 		if (!strcmp(built_ins[i], argv[0]))
 		{
 			built_in_handler(argv, env, i);
-			return;
+			return (1);
 		}
 	}
 
@@ -53,14 +53,14 @@ void cmd_handler(char **argv, env_list_t **env)
 	else
 	{
 		printf("Sorry, that's not a thing\n");
-		return;
+		return (0);
 	}
 	
 	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("Error:");
-		return;
+		return (0);
 	}
 	if (child_pid == 0)
 	{
@@ -72,5 +72,5 @@ void cmd_handler(char **argv, env_list_t **env)
 /*
 	free(path_to_file);
 */
-	return;
+	return (1);
 }

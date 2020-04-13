@@ -2,52 +2,64 @@
 
 int main(void)
 {
-	int status;
+	int status, exit_status = 0, last_return = 1, i;
 	pid_t child_pid;
 	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, **env, *path_to_file, *line = NULL;
+	char **argv, *path_to_file, *line = NULL;
 	struct stat st;
-	char *built_ins[] = {"cd", "setenv", "unsetenv", "exit"};
-	env = _initenv();
+	env_list_t **env;
+	order_t **ops = malloc(sizeof(order_t *));
+	order_t *a;
+	char **argvv;
+	int *p;
 
-	printf("ShiP$ ");
-	getline_size = getline(&line, &line_size, stdin);
-	line[getline_size - 1] = '\0';
-	printf("line_size: %li\n", getline_size);
-
-	rem_comments(line);
-	argv = get_tokens(line, " ");
-
-	/* TODO: check if builtin, if builtin, fire off correct command */
-	
-	if (stat(argv[0], &st) == 0)
-		path_to_file = argv[0];
-	else
+	env = _initenv_list();
+	while (1)
 	{
-		path_to_file = strcat(whitcher(argv[0], &env), "/");
-		path_to_file = strcat(path_to_file, argv[0]);
+		printf("ShiP$ ");
+		getline_size = getline(&line, &line_size, stdin);
+		line[getline_size - 1] = '\0';
+		printf("line_size: %li\n", getline_size);
+
+		if (getline_size == -1)
+		{
+			free(line);
+			free_env_list(env);
+			free_ops(ops);
+			return (0);
+		}
+
+		rem_comments(line);
+
+		*ops = NULL;
+		argvv = _get_cmds(line, ops);
+		a = *ops;
+		for (i = 0; argvv[i]; i++)
+		{
+			if (a)
+			{
+				if (!last_return || a->n == 3)
+				{
+					i++;
+					a = a->next;
+				}
+			}
+
+			argv = get_tokens(argvv[i], " ");
+
+			if (!_strcmp(argv[0], "exit"))
+			{
+				if (argv[1])
+					exit_status = _atoi(argv[1]);
+				free(line);
+				free_env_list(env);
+				free_ops(ops);
+				return (exit_status);
+			}
+
+			last_return = cmd_handler(argv, env);
+		}
 	}
-
-	printf("path_to_file: %s\n", path_to_file);
-	
-	/* TODO: handle execve in a fnc */
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("Error:");
-	}
-	if (child_pid == 0)
-	{
-		if (execve(path_to_file, argv, env) == -1)
-			perror("Error:");
-		return (0);
-	}
-
-	wait(&status);
-
-	free(line);
-	free(argv);
-
 	return (0);
 }
