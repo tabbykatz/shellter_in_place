@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+  * whitcher - locates cmd's in the PATH
+  * @cmd: char * containing the cmd
+  * @env: environment linked list
+  * Return: dir file is in or full path (change this to NULL
+  */
 char *whitcher(char *cmd, env_list_t **env)
 {
 	char *PATH = _getenv_list_value("PATH", env);

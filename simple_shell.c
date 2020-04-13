@@ -1,5 +1,9 @@
 #include "shell.h"
 
+/**
+  * main - entry point
+  * Return: 0
+  */
 int main(void)
 {
 	int status, exit_status = 0, last_return = 1, i;

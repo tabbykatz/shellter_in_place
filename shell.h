@@ -1,5 +1,5 @@
-#ifndef PROTOS_H
-#define PROTOS_H
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,6 +39,7 @@ int _strcmp(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, char *src);
 char *_strtok(char *input, char *delim);
+char *_strchr(char *s, char c);
 
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);
@@ -74,4 +75,5 @@ void *op_push_end(order_t **ops, int n);
 char **_get_cmds(char *line, order_t **ops);
 void free_ops(order_t **ops);
 
-#endif /* PROTOS */
+extern char **environ;
+#endif /* SHELL */

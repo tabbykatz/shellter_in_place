@@ -6,7 +6,7 @@
   */
 void rem_comments(char *str)
 {
-	char *del = strchr(str, '#');
+	char *del = _strchr(str, '#');
 
 	if (del)
 		*del = '\0';
