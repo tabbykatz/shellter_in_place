@@ -9,8 +9,17 @@ void _cd(char **argv, env_list_t **env)
 {
 	char buf[BUFSIZ]; /* BUFSIZ is predefined~8k */
 	char *home = _getenv_list_value("HOME", env);
-	char *OLDPWD[4] = {"", "OLDPWD", buf, NULL};
-	char *PWD[4] = {"", "PWD", buf, NULL};
+	char **OLDPWD = malloc(sizeof(char *) * 4);
+	char **PWD = malloc(sizeof(char *) * 4);
+
+	OLDPWD[0] = "";
+	OLDPWD[1] = "OLDPWD";
+	OLDPWD[2] = buf;
+	OLDPWD[3] = NULL;
+	PWD[0] = "";
+	PWD[1] = "PWD";
+	PWD[2] = buf;
+	PWD[3] = NULL;
 
 	getcwd(buf, sizeof(buf));
 	printf("Current dir: %s\n", buf);
@@ -27,4 +36,6 @@ void _cd(char **argv, env_list_t **env)
 	getcwd(buf, sizeof(buf));
 	printf("Current dir is now: %s, %lu bytes\n", buf, strlen(buf));
 	_setenv_list(PWD, env);
+	free(OLDPWD);
+	free(PWD);
 }
