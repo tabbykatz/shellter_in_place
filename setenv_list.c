@@ -78,7 +78,7 @@ void _setenv_list(char **argv, env_list_t **env)
   */
 void _unsetenv_list(char **argv, env_list_t **env)
 {
-	env_list_t *a = *env, *b = *env, *c;
+	env_list_t *a = *env, *b = *env;
 
 	while (a)
 	{

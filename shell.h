@@ -12,12 +12,22 @@
 #include <sys/wait.h>
 
 /* structs */
+/**
+  * struct order - struct to contain &&'s and ||'s
+  * @n: coded int, 1 = ; , 2 = && , 3 = ||
+  * @next: points to the next node
+  */
 typedef struct order
 {
 	unsigned int n;
 	struct order *next;
 } order_t;
-
+/**
+  * struct env_list - struct to contain env
+  * @name: name of env var
+  * @value: value of env var
+  * @next: points to the next node
+  */
 typedef struct env_list
 {
 	char *name;
@@ -44,6 +54,7 @@ char *_strchr(char *s, char c);
 /* cmd_handler */
 int cmd_handler(char **argv, env_list_t **env);
 void built_in_handler(char **argv, env_list_t **env, int i);
+void _cd(char **argv, env_list_t **env);
 
 /* cmd assembly */
 char **get_tokens(char *str_tok, char *delim);

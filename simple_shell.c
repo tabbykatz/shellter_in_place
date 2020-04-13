@@ -6,17 +6,14 @@
   */
 int main(void)
 {
-	int status, exit_status = 0, last_return = 1, i;
-	pid_t child_pid;
+	int exit_status = 0, last_return = 1, i;
 	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, *path_to_file, *line = NULL;
-	struct stat st;
+	char **argv, *line = NULL;
 	env_list_t **env;
 	order_t **ops = malloc(sizeof(order_t *));
 	order_t *a;
 	char **argvv;
-	int *p;
 
 	env = _initenv_list();
 	while (1)
