@@ -19,9 +19,9 @@ env_list_t **_initenv_list(void)
 		new_env = malloc(sizeof(env_list_t));
 		if (head)
 			head->next = new_env;
-		token = strdup(strtok(environ[var_count], "="));
+		token = _strdup(strtok(environ[var_count], "="));
 		new_env->name = token;
-		token = strdup(strtok(NULL, " "));
+		token = _strdup(strtok(NULL, " "));
 		new_env->value = token;
 		new_env->next = NULL;
 		head = new_env;
