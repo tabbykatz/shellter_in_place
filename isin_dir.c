@@ -22,7 +22,7 @@ int isin_dir(char *term, char *dir)
 	while ((entry = readdir(folder)))
 	{
 		files++;
-		if (!strcmp(entry->d_name, term))
+		if (!_strcmp(entry->d_name, term))
 		{
 			closedir(folder);
 			return (1);

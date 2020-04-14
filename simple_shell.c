@@ -16,20 +16,18 @@ int main(void)
 	int exit_status = 0, last_return = 1, i;
 	size_t line_size = 0;
 	ssize_t getline_size;
-	char **argv, *line = NULL;
+	char **argv, *line = NULL, **argvv;
 	env_list_t **env;
 	order_t **ops = malloc(sizeof(order_t *));
 	order_t *a;
-	char **argvv;
-	
-	signal(SIGINT, do_nothing);
+
 	env = _initenv_list();
+	signal(SIGINT, do_nothing);
 	while (1)
 	{
 		printf("ShiP$ ");
 		getline_size = getline(&line, &line_size, stdin);
 		line[getline_size - 1] = '\0';
-
 		if (getline_size == -1)
 		{
 			free(line);

@@ -54,7 +54,7 @@ void _setenv_list(char **argv, env_list_t **env)
 	if (a)
 	{
 		free(a->value);
-		a->value = strdup(argv[2]);
+		a->value = _strdup(argv[2]);
 		return;
 	}
 
@@ -82,7 +82,7 @@ void _unsetenv_list(char **argv, env_list_t **env)
 
 	while (a)
 	{
-		if (!strcmp(argv[1], a->name))
+		if (!_strcmp(argv[1], a->name))
 		{
 			b->next = a->next;
 			free_env_list_node(a);
