@@ -26,7 +26,7 @@ void _cd(char **argv, env_list_t **env)
 
 	printf("Changing to %s\n", argv[1]);
 
-	if (_strcmp(argv[1], "~"))
+	if (_strcmp(argv[1], "~") && argv[1] != NULL)
 		chdir(argv[1]);
 	else
 		chdir(home);
