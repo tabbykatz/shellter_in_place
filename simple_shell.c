@@ -1,6 +1,13 @@
 #include "shell.h"
 
 /**
+  * do_nothing - a dummy function
+  * @nothing: a dummy integer
+  */
+void do_nothing(int nothing)
+{}
+
+/**
   * main - entry point
   * Return: 0
   */
@@ -14,7 +21,8 @@ int main(void)
 	order_t **ops = malloc(sizeof(order_t *));
 	order_t *a;
 	char **argvv;
-
+	
+	signal(SIGINT, do_nothing);
 	env = _initenv_list();
 	while (1)
 	{

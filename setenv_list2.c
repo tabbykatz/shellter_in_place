@@ -12,8 +12,6 @@ env_list_t **_initenv_list(void)
 	char *token;
 	int var_count = 0;
 
-	printf("=initenv_list\n");
-
 	for (var_count = 0; environ[var_count]; var_count++)
 	{
 		new_env = malloc(sizeof(env_list_t));
@@ -40,7 +38,6 @@ void printenv_list(env_list_t **env)
 {
 	env_list_t *i = *env;
 
-	printf("=printenv_list\n");
 	while (i)
 	{
 		printf("%s", i->name);
