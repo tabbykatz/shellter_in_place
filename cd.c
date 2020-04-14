@@ -34,7 +34,7 @@ void _cd(char **argv, env_list_t **env)
 	_setenv_list(OLDPWD, env);
 
 	getcwd(buf, sizeof(buf));
-	printf("Current dir is now: %s, %lu bytes\n", buf, _strlen(buf));
+	printf("Current dir is now: %s, %d bytes\n", buf, _strlen(buf));
 	_setenv_list(PWD, env);
 	free(OLDPWD);
 	free(PWD);
