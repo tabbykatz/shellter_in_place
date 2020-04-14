@@ -12,7 +12,7 @@ char *_getenv_list_value(char *name, env_list_t **env)
 
 	while (i)
 	{
-		if (!strcmp(name, i->name))
+		if (!_strcmp(name, i->name))
 		{
 			return (i->value);
 		}
@@ -33,7 +33,7 @@ env_list_t *_getenv_list_node(char *name, env_list_t **env)
 
 	while (i)
 	{
-		if (!strcmp(name, i->name))
+		if (!_strcmp(name, i->name))
 		{
 			return (i);
 		}
@@ -64,8 +64,8 @@ void _setenv_list(char **argv, env_list_t **env)
 		a = a->next;
 	}
 	b = malloc(sizeof(env_list_t));
-	b->name = strdup(argv[1]);
-	b->value = strdup(argv[2]);
+	b->name = _strdup(argv[1]);
+	b->value = _strdup(argv[2]);
 	b->next = NULL;
 	a->next = b;
 }
@@ -120,9 +120,9 @@ char **_get_str_env(env_list_t **env)
 	{
 		entry_len = _strlen(a->name) + _strlen(a->value) + 2;
 		entry = malloc(sizeof(char) * entry_len);
-		strcpy(entry, a->name);
-		entry = strcat(entry, "=");
-		entry = strcat(entry, a->value);
+		_strcpy(entry, a->name);
+		entry = _strcat(entry, "=");
+		entry = _strcat(entry, a->value);
 		str_env[count] = entry;
 		count++;
 		a = a->next;
