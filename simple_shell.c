@@ -61,11 +61,15 @@ int main(void)
 				free(line);
 				free_env_list(env);
 				free_ops(ops);
+				free(argvv);
+				free(argv);
 				return (exit_status);
 			}
 
 			last_return = cmd_handler(argv, env);
 		}
+		free(line);
+		free(argvv);
 	}
 	return (0);
 }

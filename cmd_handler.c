@@ -81,7 +81,9 @@ int cmd_handler(char **argv, env_list_t **env)
 		exit(0);
 	}
 	wait(&status);
-/*
+	double_free(str_env);
+	free(str_env);
+	/*
 	free(path_to_file);
 */
 	return (1);

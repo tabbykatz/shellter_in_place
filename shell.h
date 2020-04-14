@@ -61,7 +61,7 @@ char **get_tokens(char *str_tok, char *delim);
 int isin_dir(char *term, char *dir);
 char *whitcher(char *cmd, env_list_t **env);
 void rem_comments(char *str);
-
+void double_free(char **argv);
 
 /* env variable */
 char **_initenv(void);
