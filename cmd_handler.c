@@ -43,7 +43,7 @@ int cmd_handler(char **argv, env_list_t **env)
 	/* if it's a buitin */
 	for (i = 0; built_ins[i]; i++)
 	{
-		if (!strcmp(built_ins[i], argv[0]))
+		if (!_strcmp(built_ins[i], argv[0]))
 		{
 			built_in_handler(argv, env, i);
 			return (1);
@@ -59,8 +59,8 @@ int cmd_handler(char **argv, env_list_t **env)
 		path_to_file = argv[0];
 	else if (strcmp(path_to_file, _getenv_list_value("PATH", env)))
 	{
-		path_to_file = strcat(whitcher(argv[0], env), "/");
-		path_to_file = strcat(path_to_file, argv[0]);
+		path_to_file = _strcat(whitcher(argv[0], env), "/");
+		path_to_file = _strcat(path_to_file, argv[0]);
 	}
 	else
 	{
