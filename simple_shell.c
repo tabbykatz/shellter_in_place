@@ -4,7 +4,7 @@
   * do_nothing - a dummy function
   * @nothing: a dummy integer
   */
-void do_nothing(int nothing)
+void do_nothing(__attribute__((unused))int nothing)
 {}
 
 /**
