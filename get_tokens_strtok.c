@@ -28,10 +28,8 @@ char **get_tokens(char *tok_str, char *delim)
 		return (NULL);
 
 	token = strtok(tok_str, delim);
-	printf("=get_tokens\n");
 	for (count = 0; token; count++)
 	{
-		printf("%lu: %s, %d bytes\n", count, token, _strlen(token));
 		tokens[count] = token;
 		token = strtok(NULL, delim);
 	}
