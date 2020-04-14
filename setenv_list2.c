@@ -19,7 +19,7 @@ env_list_t **_initenv_list(void)
 			head->next = new_env;
 		token = _strdup(strtok(environ[var_count], "="));
 		new_env->name = token;
-		token = strdup(strtok(NULL, " "));
+		token = _strdup(strtok(NULL, " "));
 		new_env->value = token;
 		new_env->next = NULL;
 		head = new_env;
